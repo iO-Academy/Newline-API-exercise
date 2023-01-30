@@ -18,14 +18,14 @@ namespace API_Exercise.Controllers
             return products;
         }
 
-        public static Product? getProductById(int id, string currency = "GBP")
+        public static object? getProductById(int id, string currency = "GBP")
         {
             Console.WriteLine(currency);
             Product? product = ProductHydratorModel.getProductById(id);
             if (product == null)
             {
                 Console.WriteLine("Unable to retrieve data for product: " + id);
-                return null;
+                return new ErrorResponse("No product with id " + id + " found.");
             }
 
             product.changeCurrency(currency);
