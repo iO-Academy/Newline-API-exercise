@@ -6,9 +6,19 @@ namespace API_Exercise.Controllers
 {
 	public class ProductsController
 	{
-		public static List<Product>? getAllProducts()
+		public static List<Product>? getAllProducts(double price = 0)
 		{
-            List<Product>? products = ProductHydratorModel.getProducts();
+            List<Product>? products = new List<Product>();
+
+            if (price > 0)
+            {
+                products = ProductHydratorModel.getProductsByPrice(price);
+            }
+            else
+            {
+                products = ProductHydratorModel.getProducts();
+            }
+            
             if (products == null)
             {
                 Console.WriteLine("Unable to retrieve data");
@@ -20,7 +30,6 @@ namespace API_Exercise.Controllers
 
         public static object? getProductById(int id, string currency = "GBP")
         {
-            Console.WriteLine(currency);
             Product? product = ProductHydratorModel.getProductById(id);
             if (product == null)
             {
@@ -32,7 +41,7 @@ namespace API_Exercise.Controllers
 
             return product;
         }
-        
+
     }
 }
 

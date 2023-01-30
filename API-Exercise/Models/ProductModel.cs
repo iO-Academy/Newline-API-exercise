@@ -30,7 +30,23 @@ namespace API_Exercise.Models
 
             return filteredProduct;
         }
-        
+
+        public static List<Product>? getProductsByPrice(double price)
+        {
+            List<Product> products = ProductHydratorModel.getProducts();
+
+            List<Product>? filteredProducts = new List<Product>();
+
+            foreach (Product product in products)
+            {
+                if (product.price >= price)
+                {
+                    filteredProducts.Add(product);
+                }
+            }
+
+            return filteredProducts;
+        }
     }
 
     public class Product

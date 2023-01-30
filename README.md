@@ -9,7 +9,8 @@
 ## API Docs
 
 `GET` - /products  
-Returns all products in JSON format, example:
+Returns all products in JSON format.
+Optionally filtered by price using a `price` query string. Only products at or above that price will be returned.
 ```json
 [
   {
