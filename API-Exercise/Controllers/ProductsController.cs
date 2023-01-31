@@ -20,7 +20,6 @@ namespace API_Exercise.Controllers
 
         public static object? getProductById(int id, string currency = "GBP")
         {
-            Console.WriteLine(currency);
             Product? product = ProductHydratorModel.getProductById(id);
             if (product == null)
             {
