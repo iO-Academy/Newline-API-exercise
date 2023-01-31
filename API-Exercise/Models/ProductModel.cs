@@ -4,18 +4,24 @@ using API_Exercise.Services;
 namespace API_Exercise.Models
 {
 
-    public class ProductHydratorModel
+    public interface IProductHydratorModel
     {
-        public static List<Product>? getProducts()
+        public List<IProduct>? getProducts();
+        public IProduct? getProductById(int id);
+    }
+
+    public class ProductHydratorModel : IProductHydratorModel
+    {
+        public List<IProduct>? getProducts()
         {
             JsonFileReader reader = new JsonFileReader();
             List<Product> products = reader.ReadAndParse<List<Product>>("products.json");
-            return products;
+            return products.Cast<IProduct>().ToList();
         }
 
-        public static Product? getProductById(int id)
+        public IProduct? getProductById(int id)
         {
-            List<Product> products = ProductHydratorModel.getProducts();
+            List<IProduct> products = this.getProducts();
 
             Product? filteredProduct = null;
 
@@ -33,7 +39,23 @@ namespace API_Exercise.Models
         
     }
 
-    public class Product
+    public interface IProduct
+    {
+        public int id { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public double price { get; set; }
+        public float discountPercentage { get; set; }
+        public float rating { get; set; }
+        public int stock { get; set; }
+        public string brand { get; set; }
+        public string category { get; set; }
+        public string thumbnail { get; set; }
+        public List<string> images { get; set; }
+        public void changeCurrency(string currency);
+    }
+
+    public class Product : IProduct
 	{
 		public int id { get; set; }
 		public string title { get; set; }
