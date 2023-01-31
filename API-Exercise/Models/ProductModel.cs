@@ -64,12 +64,14 @@ namespace API_Exercise.Models
             exchangeRates.Add("USD", 1.24);
         }
 
-        public void changeCurrency(string currency)
+        public bool changeCurrency(string currency)
         {
             if (validCurrencies.Contains(currency))
             {
                 this.currency = currency;
+                return true;
             }
+            return false;
         }
     }
 }
