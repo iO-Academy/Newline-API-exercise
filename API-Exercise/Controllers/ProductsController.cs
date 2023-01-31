@@ -1,4 +1,5 @@
 ﻿using API_Exercise.Models;
+using API_Exercise.Services;
 using System;
 using Newtonsoft.Json;
 
@@ -20,7 +21,6 @@ namespace API_Exercise.Controllers
 
         public static object? getProductById(int id, string currency = "GBP")
         {
-            Console.WriteLine(currency);
             Product? product = ProductHydratorModel.getProductById(id);
             if (product == null)
             {
@@ -28,7 +28,7 @@ namespace API_Exercise.Controllers
                 return new ErrorResponse("No product with id " + id + " found.");
             }
 
-            product.changeCurrency(currency);
+            CurrencyConverter.setCurrency(currency);
 
             return product;
         }

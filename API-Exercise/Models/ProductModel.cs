@@ -41,7 +41,7 @@ namespace API_Exercise.Models
         private double _price;
         public double price
         {
-            get { return _price * exchangeRates[currency]; }
+            get { return CurrencyConverter.ConvertCurrency(_price); }
             set { _price = value; }
         }
         public float discountPercentage { get; set; }
@@ -51,26 +51,6 @@ namespace API_Exercise.Models
         public string category { get; set; }
         public string thumbnail { get; set; }
         public List<string> images { get; set; }
-        private Dictionary<string, double> exchangeRates { get; }
-
-        private string currency = "GBP";
-        private readonly string[] validCurrencies = { "GBP", "EUR", "USD" };
-
-        public Product()
-        {
-            exchangeRates = new Dictionary<string, double>();
-            exchangeRates.Add("GBP", 1);
-            exchangeRates.Add("EUR", 1.14);
-            exchangeRates.Add("USD", 1.24);
-        }
-
-        public void changeCurrency(string currency)
-        {
-            if (validCurrencies.Contains(currency))
-            {
-                this.currency = currency;
-            }
-        }
     }
 }
 
