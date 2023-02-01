@@ -26,9 +26,11 @@
   <ItemGroup>
     <None Remove="Services\" />
     <None Remove="Moq" />
+    <None Remove="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\API-Exercise\API-Exercise.csproj" />
