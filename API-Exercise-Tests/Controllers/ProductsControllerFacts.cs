@@ -9,7 +9,7 @@ public class ProductsControllerFacts
 {
 
     [Fact]
-    public void getProducts_ShouldReturnListOfProducts()
+    public void getAllProducts_shouldReturnListOfProducts()
     {
         var product = new Mock<IProduct>();
         var model = new Mock<IProductHydratorModel>();
@@ -25,6 +25,18 @@ public class ProductsControllerFacts
     }
 
     [Fact]
+    public void getAllProducts_shouldReturnNull()
+    {
+        var model = new Mock<IProductHydratorModel>();
+        model.Setup(x => x.getProducts()).Returns((List<IProduct>)null);
+
+        var result = ProductsController.getAllProducts(model.Object);
+
+        // cannot test Console.WriteLine - should use a Logger class and test that is called
+        Assert.Null(result);
+    }
+
+    [Fact]
     public void getProductById_shouldReturnProduct()
     {
         var product = new Mock<IProduct>();
@@ -35,6 +47,19 @@ public class ProductsControllerFacts
 
         Assert.Equal(product.Object, result);
         product.Verify(x => x.changeCurrency(It.IsAny<string>()));
+
+    }
+
+    [Fact]
+    public void getProductById_shouldReturnErrorResponse()
+    {
+        var model = new Mock<IProductHydratorModel>();
+        model.Setup(x => x.getProducts()).Returns((List<IProduct>)null);
+
+        var result = (ErrorResponse)ProductsController.getProductById(1, model.Object);
+
+        Assert.IsType<ErrorResponse>(result);
+        Assert.Matches("No product with id 1 found.", result.message);
 
     }
 }
