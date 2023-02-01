@@ -56,7 +56,7 @@ namespace API_Exercise.Models
         public string category { get; set; }
         public string thumbnail { get; set; }
         public List<string> images { get; set; }
-        public void changeCurrency(string currency);
+        public bool changeCurrency(string currency);
     }
 
     public class Product : IProduct
