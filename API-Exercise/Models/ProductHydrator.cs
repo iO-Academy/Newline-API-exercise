@@ -7,6 +7,7 @@ public interface IProductHydratorModel
 {
     public List<IProduct>? getProducts();
     public IProduct? getProductById(int id);
+    public List<IProduct>? getProductsByPrice(double price);
 }
 
 public class ProductHydratorModel : IProductHydratorModel
@@ -38,6 +39,23 @@ public class ProductHydratorModel : IProductHydratorModel
         }
 
         return filteredProduct;
+    }
+
+    public List<IProduct>? getProductsByPrice(double price)
+    {
+        List<IProduct> products = this.getProducts();
+
+        List<IProduct>? filteredProducts = new List<IProduct>();
+
+        foreach (Product product in products)
+        {
+            if (product.price >= price)
+            {
+                filteredProducts.Add(product);
+            }
+        }
+
+        return filteredProducts;
     }
 
 }
