@@ -14,6 +14,8 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Services\" />
     <None Remove="Controllers\" />
+    <None Remove="xunit" />
+    <None Remove="xunit.core" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -23,6 +25,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.core" Version="2.4.2" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\" />

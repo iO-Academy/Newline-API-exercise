@@ -4,21 +4,22 @@ using Newtonsoft.Json;
 
 namespace API_Exercise.Controllers
 {
-	public class ProductsController
-	{
-		public static List<Product>? getAllProducts(double price = 0)
-		{
-            List<Product>? products = new List<Product>();
+
+    public class ProductsController
+    {
+        public static List<IProduct>? getAllProducts(IProductHydratorModel model, double price = 0)
+        {
+            List<IProduct>? products = new List<IProduct>();
 
             if (price > 0)
             {
-                products = ProductHydratorModel.getProductsByPrice(price);
+                products = model.getProductsByPrice(price);
             }
             else
             {
-                products = ProductHydratorModel.getProducts();
+                products = model.getProducts();
             }
-            
+
             if (products == null)
             {
                 Console.WriteLine("Unable to retrieve data");
@@ -28,9 +29,10 @@ namespace API_Exercise.Controllers
             return products;
         }
 
-        public static object? getProductById(int id, string currency = "GBP")
+        public static object? getProductById(int id, IProductHydratorModel model, string currency = "GBP")
         {
-            Product? product = ProductHydratorModel.getProductById(id);
+            IProduct? product = model.getProductById(id);
+
             if (product == null)
             {
                 Console.WriteLine("Unable to retrieve data for product: " + id);
