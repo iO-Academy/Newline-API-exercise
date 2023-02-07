@@ -7,13 +7,17 @@ namespace API_Exercise.Controllers
 
     public class ProductsController
     {
-        public static List<IProduct>? getAllProducts(IProductHydratorModel model, double price = 0)
+        public static List<IProduct>? getAllProducts(IProductHydratorModel model, double price = 0, double discount = 0)
         {
             List<IProduct>? products = new List<IProduct>();
 
             if (price > 0)
             {
                 products = model.getProductsByPrice(price);
+            }
+            else if (discount > 0)
+            {
+                products = model.getProductsByDiscount(discount);
             }
             else
             {

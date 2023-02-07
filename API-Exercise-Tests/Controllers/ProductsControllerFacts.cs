@@ -42,6 +42,23 @@ public class ProductsControllerFacts
     }
 
     [Fact]
+    public void getAllProducts_withDiscountFilter_shouldReturnListOfProducts()
+    {
+        var product = new Mock<IProduct>();
+        var model = new Mock<IProductHydratorModel>();
+        var products = new List<IProduct>()
+        {
+            product.Object
+        };
+        model.Setup(x => x.getProductsByDiscount(It.IsAny<double>())).Returns(products);
+
+        var result = ProductsController.getAllProducts(model.Object, 0, 15.5);
+
+        Assert.IsType<List<IProduct>>(result);
+        model.Verify(x => x.getProductsByDiscount(15.5));
+    }
+
+    [Fact]
     public void getAllProducts_shouldReturnNull()
     {
         var model = new Mock<IProductHydratorModel>();

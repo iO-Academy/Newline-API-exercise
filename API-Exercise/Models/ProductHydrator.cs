@@ -8,6 +8,7 @@ public interface IProductHydratorModel
     public List<IProduct>? getProducts();
     public IProduct? getProductById(int id);
     public List<IProduct>? getProductsByPrice(double price);
+    public List<IProduct>? getProductsByDiscount(double discount);
 }
 
 public class ProductHydratorModel : IProductHydratorModel
@@ -50,6 +51,23 @@ public class ProductHydratorModel : IProductHydratorModel
         foreach (Product product in products)
         {
             if (product.price >= price)
+            {
+                filteredProducts.Add(product);
+            }
+        }
+
+        return filteredProducts;
+    }
+
+    public List<IProduct>? getProductsByDiscount(double discount)
+    {
+        List<IProduct> products = this.getProducts();
+
+        List<IProduct>? filteredProducts = new List<IProduct>();
+
+        foreach (Product product in products)
+        {
+            if (product.discountPercentage >= discount)
             {
                 filteredProducts.Add(product);
             }
