@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace API_Exercise.Services
 {
 	public static class CurrencyConverter
